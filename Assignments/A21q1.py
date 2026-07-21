@@ -25,13 +25,12 @@ def NonPrimeThread(lst):
     nonprimes = [x for x in lst if not is_prime(x)]
     print("Non-prime numbers:", nonprimes)
 
-data = [10, 11, 12, 13, 14, 15]
+def main():
+    data = [10, 11, 12, 13, 14, 15]
+    t1 = threading.Thread(target=PrimeThread, args=(data,), name="Prime")
+    t2 = threading.Thread(target=NonPrimeThread, args=(data,), name="NonPrime")
+    t1.start(); t2.start()
+    t1.join(); t2.join()
 
-t1 = threading.Thread(target=PrimeThread, args=(data,), name="Prime")
-t2 = threading.Thread(target=NonPrimeThread, args=(data,), name="NonPrime")
-
-t1.start()
-t2.start()
-
-t1.join()
-t2.join()
+if __name__ == "__main__":
+    main()
