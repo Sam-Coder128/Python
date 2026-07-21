@@ -22,16 +22,14 @@ def ProductThread(lst):
         product *= x
     results['product'] = product
 
-data = [1, 2, 3, 4]
+def main():
+    data = [1, 2, 3, 4]
+    t1 = threading.Thread(target=SumThread, args=(data,), name="SumThread")
+    t2 = threading.Thread(target=ProductThread, args=(data,), name="ProductThread")
+    t1.start(); t2.start()
+    t1.join(); t2.join()
+    print("Sum:", results['sum'])
+    print("Product:", results['product'])
 
-t1 = threading.Thread(target=SumThread, args=(data,), name="SumThread")
-t2 = threading.Thread(target=ProductThread, args=(data,), name="ProductThread")
-
-t1.start()
-t2.start()
-
-t1.join()
-t2.join()
-
-print("Sum:", results['sum'])
-print("Product:", results['product'])
+if __name__ == "__main__":
+    main()
