@@ -20,13 +20,15 @@ def IncrementCounter(times):
         with lock:
             counter += 1
 
-threads = []
-for i in range(5):
-    t = threading.Thread(target=IncrementCounter, args=(1000,))
-    threads.append(t)
-    t.start()
+def main():
+    threads = []
+    for i in range(5):
+        t = threading.Thread(target=IncrementCounter, args=(1000,))
+        threads.append(t)
+        t.start()
+    for t in threads:
+        t.join()
+    print("Final counter value:", counter)
 
-for t in threads:
-    t.join()
-
-print("Final counter value:", counter)
+if __name__ == "__main__":
+    main()
