@@ -17,13 +17,12 @@ def MaxThread(lst):
 def MinThread(lst):
     print("Minimum element:", min(lst))
 
-data = [10, 25, 5, 40, 7]
+def main():
+    data = [10, 25, 5, 40, 7]
+    t1 = threading.Thread(target=MaxThread, args=(data,), name="MaxThread")
+    t2 = threading.Thread(target=MinThread, args=(data,), name="MinThread")
+    t1.start(); t2.start()
+    t1.join(); t2.join()
 
-t1 = threading.Thread(target=MaxThread, args=(data,), name="MaxThread")
-t2 = threading.Thread(target=MinThread, args=(data,), name="MinThread")
-
-t1.start()
-t2.start()
-
-t1.join()
-t2.join()
+if __name__ == "__main__":
+    main()
